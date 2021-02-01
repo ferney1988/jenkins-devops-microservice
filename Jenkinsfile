@@ -1,10 +1,10 @@
 pipeline {
 	//agent any
-	agent { docker { image 'node:alpine3.10'} }
+	agent { docker { image 'node:15.7'} }
 	stages {
 		stage('build') {
 			steps {
-				sh 'mvn --version'
+				sh 'node --version'
 				echo "Build"
 			}
 		}
