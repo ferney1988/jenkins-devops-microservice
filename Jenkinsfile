@@ -1,6 +1,8 @@
 pipeline {
 	agent any
-	//agent { docker { image 'node:15.7'} }
+	tools {
+		maven 'myMaven'
+	}
 	environment {
 		dockerHome = tool 'myDocker'
 		mavenHome = tool 'myMaven'
@@ -18,6 +20,11 @@ pipeline {
 				echo "JOB_NAME - $env.JOB_NAME"
 				echo "BUILD_TAG - $env.BUILD_TAG"
 				echo "BUILD_URL - $env.BUILD_URL"
+			}
+		}
+		stage ('compile') {
+			steps {
+				sh "mvn clean compile"
 			}
 		}
 		stage('Test') {
